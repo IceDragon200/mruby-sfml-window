@@ -6,5 +6,5 @@ MRuby::Gem::Specification.new('mruby-sfml-window') do |spec|
   spec.description = 'SFML Window binding'
   spec.homepage = 'https://github.com/IceDragon200/mruby-sfml-window'
 
-  spec.add_dependency 'mruby-sfml-system'
+  spec.add_dependency 'mruby-sfml-system', github: 'IceDragon200/mruby-sfml-system'
 end
