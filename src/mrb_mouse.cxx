@@ -16,7 +16,7 @@ mouse_is_button_pressed(mrb_state *mrb, mrb_value self)
 {
   mrb_int button;
   mrb_get_args(mrb, "i", &button);
-  return mrb_bool_value(sf::Mouse::isButtonPressed(button));
+  return mrb_bool_value(sf::Mouse::isButtonPressed((sf::Mouse::Button)button));
 }
 
 /* @!module SFML::Mouse
@@ -63,6 +63,7 @@ mrb_sfml_mouse_init_bind(mrb_state *mrb, struct RClass *mod)
   mrb_define_const(mrb, mouse_button_module, "XButton2", mrb_fixnum_value(sf::Mouse::Button::XButton2));
   mrb_define_const(mrb, mouse_button_module, "ButtonCount", mrb_fixnum_value(sf::Mouse::Button::ButtonCount));
 
-  mrb_define_const(mrb, mouse_wheel_module, "VerticalWheel", mrb_fixnum_value(sf::Mouse::Wheel::VerticalWheel));
-  mrb_define_const(mrb, mouse_wheel_module, "HorizontalWheel", mrb_fixnum_value(sf::Mouse::Wheel::HorizontalWheel));
+  /* Present in SFML HEAD */
+  /*mrb_define_const(mrb, mouse_wheel_module, "VerticalWheel", mrb_fixnum_value(sf::Mouse::Wheel::VerticalWheel));
+  mrb_define_const(mrb, mouse_wheel_module, "HorizontalWheel", mrb_fixnum_value(sf::Mouse::Wheel::HorizontalWheel));*/
 }
