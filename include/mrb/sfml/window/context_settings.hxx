@@ -7,5 +7,6 @@
 #include <SFML/Window/ContextSettings.hpp>
 
 extern "C" const struct mrb_data_type mrb_sfml_context_settings_type;
+extern "C" mrb_value mrb_sfml_context_settings_value(mrb_state*, const sf::ContextSettings&);
 
 #endif
