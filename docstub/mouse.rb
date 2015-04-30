@@ -1,4 +1,5 @@
 module SFML
+  # Give access to the real-time state of the mouse
   module Mouse
     # Mouse buttons
     module Button
@@ -24,7 +25,7 @@ module SFML
       HorizontalWheel = 1
     end
 
-    # @param [Button]
+    # @param [Button] button
     # @return [Boolean]
     def self.is_button_pressed(button)
     end

@@ -208,7 +208,7 @@ module SFML
       # @return [Integer]
       Pause = 100
       # @return [Integer] total number of available keys
-      KeyCount 101
+      KeyCount = 101
     end
 
     # Check if a key is pressed
