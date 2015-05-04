@@ -231,8 +231,8 @@ template <class T>
 static mrb_value
 window_set_joystick_threshold(mrb_state *mrb, mrb_value self)
 {
-  mrb_int limit;
-  mrb_get_args(mrb, "i", &limit);
+  mrb_float limit;
+  mrb_get_args(mrb, "f", &limit);
   get_window<T>(mrb, self)->setJoystickThreshold(limit);
   return self;
 }
