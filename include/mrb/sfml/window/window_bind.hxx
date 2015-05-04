@@ -296,5 +296,20 @@ mrb_sfml_window_bind_class(mrb_state *mrb, struct RClass *cls)
   mrb_define_method(mrb, cls, "request_focus",             window_request_focus<T>,              MRB_ARGS_NONE());
   mrb_define_method(mrb, cls, "has_focus",                 window_has_focus<T>,                  MRB_ARGS_NONE());
   mrb_define_method(mrb, cls, "display",                   window_display<T>,                    MRB_ARGS_NONE());
+
+  mrb_define_alias(mrb, cls, "open?", "is_open");
+  mrb_define_alias(mrb, cls, "settings", "get_settings");
+  mrb_define_alias(mrb, cls, "position", "get_position");
+  mrb_define_alias(mrb, cls, "position=", "set_position");
+  mrb_define_alias(mrb, cls, "size", "get_size");
+  mrb_define_alias(mrb, cls, "size=", "set_size");
+  mrb_define_alias(mrb, cls, "title=", "set_title");
+  mrb_define_alias(mrb, cls, "visible=", "set_visible");
+  mrb_define_alias(mrb, cls, "vertical_sync_enabled=", "set_vertical_sync_enabled");
+  mrb_define_alias(mrb, cls, "mouse_cursor_visible=", "set_mouse_cursor_visible");
+  mrb_define_alias(mrb, cls, "key_repeat_enabled=", "set_key_repeat_enabled");
+  mrb_define_alias(mrb, cls, "framerate_limit=", "set_framerate_limit");
+  mrb_define_alias(mrb, cls, "joystick_threshold=", "set_joystick_threshold");
+  mrb_define_alias(mrb, cls, "active=", "set_active");
 }
 #endif
