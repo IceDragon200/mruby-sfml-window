@@ -116,7 +116,7 @@ mrb_sfml_event_sub_class_get(mrb_state *mrb, const char *classname)
   return mrb_class_get_under(mrb, mrb_sfml_event_class_get(mrb), classname);
 }
 
-static inline mrb_value
+extern "C" mrb_value
 mrb_sfml_event_value(mrb_state *mrb, const sf::Event &event)
 {
   mrb_value result = mrb_obj_new(mrb, mrb_sfml_event_class_get(mrb), 0, NULL);
@@ -248,12 +248,48 @@ key_event_initialize(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+key_event_get_code(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_key_event(mrb, self)->code);
+}
+
+static mrb_value
+key_event_get_alt(mrb_state *mrb, mrb_value self)
+{
+  return mrb_bool_value(get_key_event(mrb, self)->alt);
+}
+
+static mrb_value
+key_event_get_control(mrb_state *mrb, mrb_value self)
+{
+  return mrb_bool_value(get_key_event(mrb, self)->control);
+}
+
+static mrb_value
+key_event_get_shift(mrb_state *mrb, mrb_value self)
+{
+  return mrb_bool_value(get_key_event(mrb, self)->shift);
+}
+
+static mrb_value
+key_event_get_system(mrb_state *mrb, mrb_value self)
+{
+  return mrb_bool_value(get_key_event(mrb, self)->system);
+}
+
+static mrb_value
 text_event_initialize(mrb_state *mrb, mrb_value self)
 {
   sf::Event::TextEvent *event = new sf::Event::TextEvent();
   text_event_free(mrb, DATA_PTR(self));
   mrb_data_init(self, event, &mrb_sfml_text_event_type);
   return self;
+}
+
+static mrb_value
+text_event_get_unicode(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_text_event(mrb, self)->unicode);
 }
 
 static mrb_value
@@ -266,6 +302,19 @@ mouse_move_event_initialize(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+mouse_move_event_get_x(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_mouse_move_event(mrb, self)->x);
+}
+
+static mrb_value
+mouse_move_event_get_y(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_mouse_move_event(mrb, self)->y);
+}
+
+
+static mrb_value
 mouse_button_event_initialize(mrb_state *mrb, mrb_value self)
 {
   sf::Event::MouseButtonEvent *event = new sf::Event::MouseButtonEvent();
@@ -273,6 +322,25 @@ mouse_button_event_initialize(mrb_state *mrb, mrb_value self)
   mrb_data_init(self, event, &mrb_sfml_mouse_button_event_type);
   return self;
 }
+
+static mrb_value
+mouse_button_event_get_button(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_mouse_button_event(mrb, self)->button);
+}
+
+static mrb_value
+mouse_button_event_get_x(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_mouse_button_event(mrb, self)->x);
+}
+
+static mrb_value
+mouse_button_event_get_y(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_mouse_button_event(mrb, self)->y);
+}
+
 
 static mrb_value
 mouse_wheel_event_initialize(mrb_state *mrb, mrb_value self)
@@ -284,6 +352,25 @@ mouse_wheel_event_initialize(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+mouse_wheel_event_get_delta(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_mouse_wheel_event(mrb, self)->delta);
+}
+
+static mrb_value
+mouse_wheel_event_get_x(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_mouse_wheel_event(mrb, self)->x);
+}
+
+static mrb_value
+mouse_wheel_event_get_y(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_mouse_wheel_event(mrb, self)->y);
+}
+
+
+static mrb_value
 joystick_move_event_initialize(mrb_state *mrb, mrb_value self)
 {
   sf::Event::JoystickMoveEvent *event = new sf::Event::JoystickMoveEvent();
@@ -291,6 +378,25 @@ joystick_move_event_initialize(mrb_state *mrb, mrb_value self)
   mrb_data_init(self, event, &mrb_sfml_joystick_move_event_type);
   return self;
 }
+
+static mrb_value
+joystick_move_event_get_joystick_id(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_joystick_move_event(mrb, self)->joystickId);
+}
+
+static mrb_value
+joystick_move_event_get_axis(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_joystick_move_event(mrb, self)->axis);
+}
+
+static mrb_value
+joystick_move_event_get_position(mrb_state *mrb, mrb_value self)
+{
+  return mrb_float_value(mrb, get_joystick_move_event(mrb, self)->position);
+}
+
 
 static mrb_value
 joystick_button_event_initialize(mrb_state *mrb, mrb_value self)
@@ -302,6 +408,19 @@ joystick_button_event_initialize(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+joystick_button_event_get_joystick_id(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_joystick_button_event(mrb, self)->joystickId);
+}
+
+static mrb_value
+joystick_button_event_get_button(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_joystick_button_event(mrb, self)->button);
+}
+
+
+static mrb_value
 joystick_connect_event_initialize(mrb_state *mrb, mrb_value self)
 {
   sf::Event::JoystickConnectEvent *event = new sf::Event::JoystickConnectEvent();
@@ -309,6 +428,13 @@ joystick_connect_event_initialize(mrb_state *mrb, mrb_value self)
   mrb_data_init(self, event, &mrb_sfml_joystick_connect_event_type);
   return self;
 }
+
+static mrb_value
+joystick_connect_event_get_joystick_id(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_joystick_connect_event(mrb, self)->joystickId);
+}
+
 
 static mrb_value
 touch_event_initialize(mrb_state *mrb, mrb_value self)
@@ -320,6 +446,25 @@ touch_event_initialize(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+touch_event_get_finger(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_touch_event(mrb, self)->finger);
+}
+
+static mrb_value
+touch_event_get_x(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_touch_event(mrb, self)->x);
+}
+
+static mrb_value
+touch_event_get_y(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_touch_event(mrb, self)->y);
+}
+
+
+static mrb_value
 sensor_event_initialize(mrb_state *mrb, mrb_value self)
 {
   sf::Event::SensorEvent *event = new sf::Event::SensorEvent();
@@ -328,6 +473,29 @@ sensor_event_initialize(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+static mrb_value
+sensor_event_get_type(mrb_state *mrb, mrb_value self)
+{
+  return mrb_fixnum_value(get_sensor_event(mrb, self)->type);
+}
+
+static mrb_value
+sensor_event_get_x(mrb_state *mrb, mrb_value self)
+{
+  return mrb_float_value(mrb, get_sensor_event(mrb, self)->x);
+}
+
+static mrb_value
+sensor_event_get_y(mrb_state *mrb, mrb_value self)
+{
+  return mrb_float_value(mrb, get_sensor_event(mrb, self)->y);
+}
+
+static mrb_value
+sensor_event_get_z(mrb_state *mrb, mrb_value self)
+{
+  return mrb_float_value(mrb, get_sensor_event(mrb, self)->z);
+}
 
 extern "C" void
 mrb_sfml_event_init_bind(mrb_state *mrb, struct RClass *mod)
@@ -367,34 +535,61 @@ mrb_sfml_event_init_bind(mrb_state *mrb, struct RClass *mod)
   mrb_define_method(mrb, size_event_cls, "height",           size_event_get_height,       MRB_ARGS_NONE());
 
   MRB_SET_INSTANCE_TT(key_event_cls, MRB_TT_DATA);
-  mrb_define_method(mrb, key_event_cls, "initialize",       key_event_initialize,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, key_event_cls, "initialize", key_event_initialize,  MRB_ARGS_NONE());
+  mrb_define_method(mrb, key_event_cls, "code",       key_event_get_code,    MRB_ARGS_NONE());
+  mrb_define_method(mrb, key_event_cls, "alt",        key_event_get_alt,     MRB_ARGS_NONE());
+  mrb_define_method(mrb, key_event_cls, "control",    key_event_get_control, MRB_ARGS_NONE());
+  mrb_define_method(mrb, key_event_cls, "shift",      key_event_get_shift,   MRB_ARGS_NONE());
+  mrb_define_method(mrb, key_event_cls, "system",     key_event_get_system,  MRB_ARGS_NONE());
 
   MRB_SET_INSTANCE_TT(text_event_cls, MRB_TT_DATA);
-  mrb_define_method(mrb, text_event_cls, "initialize",       text_event_initialize,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, text_event_cls, "initialize", text_event_initialize,  MRB_ARGS_NONE());
+  mrb_define_method(mrb, text_event_cls, "unicode",    text_event_get_unicode, MRB_ARGS_NONE());
 
   MRB_SET_INSTANCE_TT(mouse_move_event_cls, MRB_TT_DATA);
-  mrb_define_method(mrb, mouse_move_event_cls, "initialize",       mouse_move_event_initialize,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, mouse_move_event_cls, "initialize", mouse_move_event_initialize, MRB_ARGS_NONE());
+  mrb_define_method(mrb, mouse_move_event_cls, "x",          mouse_move_event_get_x,      MRB_ARGS_NONE());
+  mrb_define_method(mrb, mouse_move_event_cls, "y",          mouse_move_event_get_y,      MRB_ARGS_NONE());
 
   MRB_SET_INSTANCE_TT(mouse_button_event_cls, MRB_TT_DATA);
-  mrb_define_method(mrb, mouse_button_event_cls, "initialize",       mouse_button_event_initialize,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, mouse_button_event_cls, "initialize", mouse_button_event_initialize, MRB_ARGS_NONE());
+  mrb_define_method(mrb, mouse_button_event_cls, "button",     mouse_button_event_get_button, MRB_ARGS_NONE());
+  mrb_define_method(mrb, mouse_button_event_cls, "x",          mouse_button_event_get_x,      MRB_ARGS_NONE());
+  mrb_define_method(mrb, mouse_button_event_cls, "y",          mouse_button_event_get_y,      MRB_ARGS_NONE());
 
   MRB_SET_INSTANCE_TT(mouse_wheel_event_cls, MRB_TT_DATA);
-  mrb_define_method(mrb, mouse_wheel_event_cls, "initialize",       mouse_wheel_event_initialize,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, mouse_wheel_event_cls, "initialize", mouse_wheel_event_initialize, MRB_ARGS_NONE());
+  mrb_define_method(mrb, mouse_wheel_event_cls, "delta",      mouse_wheel_event_get_delta,  MRB_ARGS_NONE());
+  mrb_define_method(mrb, mouse_wheel_event_cls, "x",          mouse_wheel_event_get_x,      MRB_ARGS_NONE());
+  mrb_define_method(mrb, mouse_wheel_event_cls, "y",          mouse_wheel_event_get_y,      MRB_ARGS_NONE());
 
   MRB_SET_INSTANCE_TT(joystick_move_event_cls, MRB_TT_DATA);
-  mrb_define_method(mrb, joystick_move_event_cls, "initialize",       joystick_move_event_initialize,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, joystick_move_event_cls, "initialize",  joystick_move_event_initialize,      MRB_ARGS_NONE());
+  mrb_define_method(mrb, joystick_move_event_cls, "joystick_id", joystick_move_event_get_joystick_id, MRB_ARGS_NONE());
+  mrb_define_method(mrb, joystick_move_event_cls, "axis",        joystick_move_event_get_axis,        MRB_ARGS_NONE());
+  mrb_define_method(mrb, joystick_move_event_cls, "position",    joystick_move_event_get_position,    MRB_ARGS_NONE());
 
   MRB_SET_INSTANCE_TT(joystick_button_event_cls, MRB_TT_DATA);
-  mrb_define_method(mrb, joystick_button_event_cls, "initialize",       joystick_button_event_initialize,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, joystick_button_event_cls, "initialize",  joystick_button_event_initialize,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, joystick_button_event_cls, "joystick_id", joystick_button_event_get_joystick_id, MRB_ARGS_NONE());
+  mrb_define_method(mrb, joystick_button_event_cls, "button",      joystick_button_event_get_button, MRB_ARGS_NONE());
 
   MRB_SET_INSTANCE_TT(joystick_connect_event_cls, MRB_TT_DATA);
-  mrb_define_method(mrb, joystick_connect_event_cls, "initialize",       joystick_connect_event_initialize,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, joystick_connect_event_cls, "initialize",  joystick_connect_event_initialize,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, joystick_connect_event_cls, "joystick_id", joystick_connect_event_get_joystick_id, MRB_ARGS_NONE());
 
   MRB_SET_INSTANCE_TT(touch_event_cls, MRB_TT_DATA);
-  mrb_define_method(mrb, touch_event_cls, "initialize",       touch_event_initialize,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, touch_event_cls, "initialize", touch_event_initialize, MRB_ARGS_NONE());
+  mrb_define_method(mrb, touch_event_cls, "finger",     touch_event_get_finger, MRB_ARGS_NONE());
+  mrb_define_method(mrb, touch_event_cls, "x",          touch_event_get_x,      MRB_ARGS_NONE());
+  mrb_define_method(mrb, touch_event_cls, "y",          touch_event_get_y,      MRB_ARGS_NONE());
 
   MRB_SET_INSTANCE_TT(sensor_event_cls, MRB_TT_DATA);
-  mrb_define_method(mrb, sensor_event_cls, "initialize",       sensor_event_initialize,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, sensor_event_cls, "initialize", sensor_event_initialize, MRB_ARGS_NONE());
+  mrb_define_method(mrb, sensor_event_cls, "type",       sensor_event_get_type,   MRB_ARGS_NONE());
+  mrb_define_method(mrb, sensor_event_cls, "x",          sensor_event_get_x,      MRB_ARGS_NONE());
+  mrb_define_method(mrb, sensor_event_cls, "y",          sensor_event_get_y,      MRB_ARGS_NONE());
+  mrb_define_method(mrb, sensor_event_cls, "z",          sensor_event_get_z,      MRB_ARGS_NONE());
 
   mrb_define_const(mrb, event_type_mod, "Closed",                 mrb_fixnum_value(sf::Event::EventType::Closed));
   mrb_define_const(mrb, event_type_mod, "Resized",                mrb_fixnum_value(sf::Event::EventType::Resized));
