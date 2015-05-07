@@ -613,4 +613,5 @@ mrb_sfml_event_init_bind(mrb_state *mrb, struct RClass *mod)
   mrb_define_const(mrb, event_type_mod, "TouchMoved",             mrb_fixnum_value(sf::Event::EventType::TouchMoved));
   mrb_define_const(mrb, event_type_mod, "TouchEnded",             mrb_fixnum_value(sf::Event::EventType::TouchEnded));
   mrb_define_const(mrb, event_type_mod, "SensorChanged",          mrb_fixnum_value(sf::Event::EventType::SensorChanged));
+  mrb_define_const(mrb, event_type_mod, "Count",                  mrb_fixnum_value(sf::Event::EventType::Count));
 }
