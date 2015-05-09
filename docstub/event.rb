@@ -1,6 +1,82 @@
 module SFML
   # Defines a system event and its parameters
   class Event
+    # Size events parameters (Resized)
+    class SizeEvent
+      attr_accessor :width
+      attr_accessor :height
+    end
+
+    # Keyboard event parameters (KeyPressed, KeyReleased)
+    class KeyEvent
+      attr_reader :code
+      attr_reader :alt
+      attr_reader :control
+      attr_reader :shift
+      attr_reader :system
+    end
+
+    # Text event parameters (TextEntered)
+    class TextEvent
+      attr_reader :unicode
+    end
+
+    # Mouse move event parameters (MouseMoved)
+    class MouseMoveEvent
+      attr_reader :x
+      attr_reader :y
+    end
+
+    # Mouse buttons events parameters
+    # (MouseButtonPressed, MouseButtonReleased)
+    class MouseButtonEvent
+      attr_reader :button
+      attr_reader :x
+      attr_reader :y
+    end
+
+    # Mouse wheel events parameters (MouseWheelMoved)
+    class MouseWheelEvent
+      attr_reader :delta
+      attr_reader :x
+      attr_reader :y
+    end
+
+    # Joystick connection events parameters
+    # (JoystickConnected, JoystickDisconnected)
+    class JoystickConnectEvent
+      attr_reader :joystick_id
+    end
+
+    # Joystick axis move event parameters (JoystickMoved)
+    class JoystickMoveEvent
+      attr_reader :joystick_id
+      attr_reader :axis
+      attr_reader :position
+    end
+
+    # Joystick buttons events parameters
+    # (JoystickButtonPressed, JoystickButtonReleased)
+    class JoystickButtonEvent
+      attr_reader :joystick_id
+      attr_reader :button
+    end
+
+    # Touch events parameters (TouchBegan, TouchMoved, TouchEnded)
+    class TouchEvent
+      attr_reader :finger
+      attr_reader :x
+      attr_reader :y
+    end
+
+    # Sensor event parameters (SensorChanged)
+    class SensorEvent
+      attr_reader :type
+      attr_reader :x
+      attr_reader :y
+      attr_reader :z
+    end
+
     # Enumeration of the different types of events
     module EventType
       # @return [Integer]
@@ -51,55 +127,43 @@ module SFML
       Count = 22
     end
 
-    def initialize
-    end
-
     # @return [EventType]
-    def type
-    end
+    attr_reader :type
 
     # @return [SizeEvent]
-    def size
-    end
+    attr_reader :size
 
     # @return [KeyEvent]
-    def key
-    end
+    attr_reader :key
 
     # @return [TextEvent]
-    def text
-    end
+    attr_reader :text
 
     # @return [MouseMoveEvent]
-    def mouse_move
-    end
+    attr_reader :mouse_move
 
     # @return [MouseButtonEvent]
-    def mouse_button
-    end
+    attr_reader :mouse_button
 
     # @return [MouseWheelEvent]
-    def mouse_wheel
-    end
+    attr_reader :mouse_wheel
 
     # @return [JoystickMoveEvent]
-    def joystick_move
-    end
+    attr_reader :joystick_move
 
     # @return [JoystickButtonEvent]
-    def joystick_button
-    end
+    attr_reader :joystick_button
 
     # @return [JoystickConnectEvent]
-    def joystick_connect
-    end
+    attr_reader :joystick_connect
 
     # @return [JoystickTouchEvent]
-    def touch
-    end
+    attr_reader :touch
 
     # @return [SensorEvent]
-    def sensor
+    attr_reader :sensor
+
+    def initialize
     end
   end
 end
