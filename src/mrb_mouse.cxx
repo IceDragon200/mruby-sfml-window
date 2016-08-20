@@ -63,7 +63,6 @@ mrb_sfml_mouse_init_bind(mrb_state *mrb, struct RClass *mod)
   mrb_define_const(mrb, mouse_button_module, "XButton2", mrb_fixnum_value(sf::Mouse::Button::XButton2));
   mrb_define_const(mrb, mouse_button_module, "ButtonCount", mrb_fixnum_value(sf::Mouse::Button::ButtonCount));
 
-  /* Present in SFML HEAD */
-  /*mrb_define_const(mrb, mouse_wheel_module, "VerticalWheel", mrb_fixnum_value(sf::Mouse::Wheel::VerticalWheel));
-  mrb_define_const(mrb, mouse_wheel_module, "HorizontalWheel", mrb_fixnum_value(sf::Mouse::Wheel::HorizontalWheel));*/
+  mrb_define_const(mrb, mouse_wheel_module, "VerticalWheel", mrb_fixnum_value(sf::Mouse::Wheel::VerticalWheel));
+  mrb_define_const(mrb, mouse_wheel_module, "HorizontalWheel", mrb_fixnum_value(sf::Mouse::Wheel::HorizontalWheel));
 }
