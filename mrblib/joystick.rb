@@ -1,5 +1,5 @@
 module SFML
-  class Joystick
+  module Joystick
     # @return [Hash<Symbol, Object>] identfication data
     def self.identification(id)
       data = identification_data(id)
