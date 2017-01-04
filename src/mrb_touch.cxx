@@ -34,7 +34,7 @@ touch_get_position(mrb_state *mrb, mrb_value self)
 
 /* @!class SFML::Touch
  */
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_sfml_touch_init_bind(mrb_state *mrb, struct RClass *mod)
 {
   struct RClass *touch_module = mrb_define_module_under(mrb, mod, "Touch");

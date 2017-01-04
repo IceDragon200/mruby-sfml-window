@@ -12,6 +12,7 @@
 #include "mrb/sfml/window/event.hxx"
 #include "mrb/sfml/window/video_mode.hxx"
 #include "mrb/sfml/system/vector2.hxx"
+#include "mrb/sfml/helpers.hxx"
 
 template <class T> static inline const mrb_data_type* mrb_get_sfml_window_type();
 template <> inline const mrb_data_type* mrb_get_sfml_window_type<sf::Window>() { return &mrb_sfml_window_type; }

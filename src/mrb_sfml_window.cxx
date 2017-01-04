@@ -15,7 +15,7 @@
 
 static struct RClass *sfml_module;
 
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_mruby_sfml_window_gem_init(mrb_state *mrb)
 {
   sfml_module = mrb_define_module(mrb, "SFML");
@@ -33,7 +33,7 @@ mrb_mruby_sfml_window_gem_init(mrb_state *mrb)
   mrb_sfml_touch_init_bind(mrb, sfml_module);
 }
 
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_mruby_sfml_window_gem_final(mrb_state *mrb)
 {
 }

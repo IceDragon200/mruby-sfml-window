@@ -32,7 +32,7 @@ keyboard_set_virtual_keyboard_visible(mrb_state *mrb, mrb_value self)
   return self;
 }
 
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_sfml_keyboard_init_bind(mrb_state *mrb, struct RClass *mod)
 {
   struct RClass *keyboard_module = mrb_define_module_under(mrb, mod, "Keyboard");

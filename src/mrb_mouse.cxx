@@ -45,7 +45,7 @@ mouse_set_position(mrb_state *mrb, mrb_value self)
 
 /* @!module SFML::Mouse
  */
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_sfml_mouse_init_bind(mrb_state *mrb, struct RClass *mod)
 {
   struct RClass *mouse_module = mrb_define_module_under(mrb, mod, "Mouse");

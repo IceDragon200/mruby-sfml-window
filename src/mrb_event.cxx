@@ -19,18 +19,18 @@ static mrb_data_free_func joystick_connect_event_free = cxx_mrb_data_free<sf::Ev
 static mrb_data_free_func touch_event_free = cxx_mrb_data_free<sf::Event::TouchEvent>;
 static mrb_data_free_func sensor_event_free = cxx_mrb_data_free<sf::Event::SensorEvent>;
 
-extern "C" const struct mrb_data_type mrb_sfml_event_type = { "sf::Event", event_free };
-extern "C" const struct mrb_data_type mrb_sfml_size_event_type = { "sf::Event::SizeEvent", size_event_free };
-extern "C" const struct mrb_data_type mrb_sfml_key_event_type = { "sf::Event::KeyEvent", key_event_free };
-extern "C" const struct mrb_data_type mrb_sfml_text_event_type = { "sf::Event::TextEvent", text_event_free };
-extern "C" const struct mrb_data_type mrb_sfml_mouse_move_event_type = { "sf::Event::MoveMoveEvent", mouse_move_event_free };
-extern "C" const struct mrb_data_type mrb_sfml_mouse_button_event_type = { "sf::Event::MouseButtonEvent", mouse_button_event_free };
-extern "C" const struct mrb_data_type mrb_sfml_mouse_wheel_event_type = { "sf::Event::MouseWheelEvent", mouse_wheel_event_free };
-extern "C" const struct mrb_data_type mrb_sfml_joystick_move_event_type = { "sf::Event::JoystickMoveEvent", joystick_move_event_free };
-extern "C" const struct mrb_data_type mrb_sfml_joystick_button_event_type = { "sf::Event::JoystickButtonEvent", joystick_button_event_free };
-extern "C" const struct mrb_data_type mrb_sfml_joystick_connect_event_type = { "sf::Event::JoystickConnectEvent", joystick_connect_event_free };
-extern "C" const struct mrb_data_type mrb_sfml_touch_event_type = { "sf::Event::TouchEvent", touch_event_free };
-extern "C" const struct mrb_data_type mrb_sfml_sensor_event_type = { "sf::Event::SensorEvent", sensor_event_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_event_type = { "sf::Event", event_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_size_event_type = { "sf::Event::SizeEvent", size_event_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_key_event_type = { "sf::Event::KeyEvent", key_event_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_text_event_type = { "sf::Event::TextEvent", text_event_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_mouse_move_event_type = { "sf::Event::MoveMoveEvent", mouse_move_event_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_mouse_button_event_type = { "sf::Event::MouseButtonEvent", mouse_button_event_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_mouse_wheel_event_type = { "sf::Event::MouseWheelEvent", mouse_wheel_event_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_joystick_move_event_type = { "sf::Event::JoystickMoveEvent", joystick_move_event_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_joystick_button_event_type = { "sf::Event::JoystickButtonEvent", joystick_button_event_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_joystick_connect_event_type = { "sf::Event::JoystickConnectEvent", joystick_connect_event_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_touch_event_type = { "sf::Event::TouchEvent", touch_event_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_sensor_event_type = { "sf::Event::SensorEvent", sensor_event_free };
 
 static inline sf::Event*
 get_event(mrb_state *mrb, mrb_value self)
@@ -116,7 +116,7 @@ mrb_sfml_event_sub_class_get(mrb_state *mrb, const char *classname)
   return mrb_class_get_under(mrb, mrb_sfml_event_class_get(mrb), classname);
 }
 
-extern "C" mrb_value
+MRB_SFML_EXTERN mrb_value
 mrb_sfml_event_value(mrb_state *mrb, const sf::Event &event)
 {
   mrb_value result = mrb_obj_new(mrb, mrb_sfml_event_class_get(mrb), 0, NULL);
@@ -497,7 +497,7 @@ sensor_event_get_z(mrb_state *mrb, mrb_value self)
   return mrb_float_value(mrb, get_sensor_event(mrb, self)->z);
 }
 
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_sfml_event_init_bind(mrb_state *mrb, struct RClass *mod)
 {
   struct RClass *event_cls = mrb_define_class_under(mrb, mod, "Event", mrb->object_class);

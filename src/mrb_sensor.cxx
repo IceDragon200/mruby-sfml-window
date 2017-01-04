@@ -50,7 +50,7 @@ sensor_get_value(mrb_state *mrb, mrb_value self)
 
 /* @!class SFML::Sensor
  */
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_sfml_sensor_init_bind(mrb_state *mrb, struct RClass *mod)
 {
   struct RClass *sensor_mod = mrb_define_module_under(mrb, mod, "Sensor");
